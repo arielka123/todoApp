@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: 'jdbc:h2:file:C:\\Users\\Arielka\\Desktop\\projekt_przyszly_programista\\java\\0_java_web\\Spring-framework\\todo-app\\todo-app\\todo-db'
+  h2.console:
+    enabled: true
+    path: '/console'
+  jpa.hibernate:
+    ddl-auto: validate
+
+
+
+
