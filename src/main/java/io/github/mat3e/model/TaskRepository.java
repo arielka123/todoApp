@@ -7,8 +7,10 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
+//contract
 public interface TaskRepository {
     List<Task> findAll();
+
     Page<Task> findAll(Pageable page);
 
     Optional<Task> findById(Integer id);
