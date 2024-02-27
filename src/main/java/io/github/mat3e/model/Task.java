@@ -1,7 +1,6 @@
 package io.github.mat3e.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
 
@@ -52,5 +51,15 @@ public class Task extends BaseTask {
         super.setDone(source.isDone());
         deadline = source.deadline;
         group = source.group;
+    }
+
+    @Override
+    public String getDescription() {
+        return super.getDescription();
+    }
+
+    @Override
+    public boolean isDone() {
+        return super.isDone();
     }
 }
