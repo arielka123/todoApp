@@ -3,6 +3,9 @@ package io.github.mat3e.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "tasks")
 public class Task {
@@ -12,7 +15,9 @@ public class Task {
     @NotBlank(message = "Task's description must not be empty")
     private String description;
     private boolean done;
-
+    private LocalDateTime deadline;
+    private LocalDateTime createdOn;
+    private LocalDateTime updatedOn;
 
     public Task() {
     }
@@ -21,8 +26,16 @@ public class Task {
         return id;
     }
 
-    public void setId(int id) {
+    void setId(int id) {
         this.id = id;
+    }
+
+    public LocalDateTime getDeadLine() {
+        return deadline;
+    }
+
+    public void setDeadLine(LocalDateTime deadLine) {
+        this.deadline = deadLine;
     }
 
     public String getDescription() {
@@ -40,4 +53,21 @@ public class Task {
     public void setDone(boolean done) {
         this.done = done;
     }
+
+    public void updateFrom(final Task source){
+        description = source.description;
+        done = source.done;
+        deadline = source.deadline;
+    }
+
+    @PrePersist
+    void prePersist(){
+        createdOn = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    void preMerge(){
+        updatedOn = LocalDateTime.now();
+    }
+
 }
