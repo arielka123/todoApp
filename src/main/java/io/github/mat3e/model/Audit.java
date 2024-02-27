@@ -1,23 +1,24 @@
 package io.github.mat3e.model;
 
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 
 import java.time.LocalDateTime;
 
-@MappedSuperclass
-public class BaseAuditableEntity {
+@Embeddable
+class Audit {
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
 
     @PrePersist
-    void prePersist(){
+        //gdy zapisujemy
+    void prePersist() {
         createdOn = LocalDateTime.now();
     }
 
     @PreUpdate
-    void preMerge(){
+    void preMerge() {
         updatedOn = LocalDateTime.now();
     }
 }
