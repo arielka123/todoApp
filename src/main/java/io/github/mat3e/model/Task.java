@@ -13,13 +13,17 @@ public class Task extends BaseTask {
     private LocalDateTime deadline;
 
     @Embedded
-    private Audit audit = new Audit();
+    private final Audit audit = new Audit();
 
     @ManyToOne //wiele tasków w jednej grupie
     @JoinColumn(name = "task_group_id")
     private TaskGroup group;
 
-    public Task() {
+    Task() {
+    }
+    public Task(String description, LocalDateTime deadline) {
+        this.deadline=deadline;
+        super.setDescription(description);
     }
 
     public int getId() {
