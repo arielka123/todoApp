@@ -8,7 +8,7 @@ public interface TaskGroupRepository {
 
     Optional<TaskGroup> findById(Integer id);
 
-    Task save(Task entity);
+    TaskGroup save(TaskGroup entity);
 
     boolean existsByDoneIsFalseAndAndProject_Id(Integer projectId);
 
