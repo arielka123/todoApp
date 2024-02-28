@@ -34,7 +34,7 @@ public class TaskGroup extends BaseTask {
         return tasks;
     }
 
-    void setTasks(Set<Task> tasks) {
+    public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -44,5 +44,25 @@ public class TaskGroup extends BaseTask {
 
     void setProject(Project project) {
         this.project = project;
+    }
+
+    @Override
+    public String getDescription() {
+        return super.getDescription();
+    }
+
+    @Override
+    public boolean isDone() {
+        return super.isDone();
+    }
+
+    @Override
+    public void setDescription(String description) {
+        super.setDescription(description);
+    }
+
+    @Override
+    public void setDone(boolean done) {
+        super.setDone(done);
     }
 }

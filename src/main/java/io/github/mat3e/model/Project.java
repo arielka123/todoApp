@@ -44,4 +44,12 @@ public class Project {
     void setGroups(Set<TaskGroup> groups) {
         this.groups = groups;
     }
+
+    Set<ProjectStep> steps() {
+        return steps;
+    }
+
+    public void setSteps(Set<ProjectStep> steps) {
+        this.steps = steps;
+    }
 }
