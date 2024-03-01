@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
+import java.lang.reflect.Field;
 import java.util.*;
 
 @Configuration
@@ -59,7 +60,18 @@ public class TestConfiguration {
 
             @Override
             public Task save(Task entity) {
-                return map.put(map.size()+1, entity);
+                int key = map.size()+1;
+                try {
+                    var field = Task.class.getDeclaredField("id");
+                    field.setAccessible(true);
+                    field.set(entity, key);
+
+                } catch (NoSuchFieldException | IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+
+                map.put(key, entity);
+                return map.get(key);
             }
 
             @Override
