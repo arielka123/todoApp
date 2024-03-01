@@ -3,13 +3,12 @@ package io.github.mat3e.logic;
 import io.github.mat3e.TaskConfigurationProperties;
 import io.github.mat3e.model.*;
 import io.github.mat3e.model.projection.GroupReadModel;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+//@Service
 public class ProjectService {
     private final ProjectRepository repository;
     private final TaskGroupRepository taskGroupRepository;
