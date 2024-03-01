@@ -5,16 +5,14 @@ import io.github.mat3e.model.TaskGroupRepository;
 import io.github.mat3e.model.TaskRepository;
 import io.github.mat3e.model.projection.GroupReadModel;
 import io.github.mat3e.model.projection.GroupWriteModel;
-import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 
 //prosrednik pomiedzy repozytorium a controllerem
-@Service
-@RequestScope
+//@Service
+//@RequestScope
 public class TaskGroupService {
     private final TaskGroupRepository repository;
     private final TaskRepository taskRepository;
