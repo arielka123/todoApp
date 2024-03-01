@@ -15,7 +15,7 @@ public class TestConfiguration {
     Map<Integer,Task> map = new HashMap<>();
 
     @Bean
-    @Profile({"integration","!prod"})
+    @Profile({"integration"})
     TaskRepository testRepo(){
         return new TaskRepository() {
             @Override
