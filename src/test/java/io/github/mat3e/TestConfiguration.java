@@ -4,6 +4,7 @@ import io.github.mat3e.model.Task;
 import io.github.mat3e.model.TaskRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,7 @@ public class TestConfiguration {
     Map<Integer,Task> map = new HashMap<>();
 
     @Bean
+    @Primary
     @Profile({"integration"})
     TaskRepository testRepo(){
         return new TaskRepository() {
