@@ -19,6 +19,8 @@ public class ProjectStep {
     @JoinColumn(name = "project_id") //foreign key
     private Project project;
 
+    public ProjectStep() {
+    }
 
     public int getId() {
         return id;
