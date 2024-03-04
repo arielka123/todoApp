@@ -2,15 +2,17 @@ package io.github.mat3e.controller;
 
 import io.github.mat3e.model.Task;
 import io.github.mat3e.model.TaskRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +25,16 @@ class TaskController {
 
     TaskController(final TaskRepository repository) {
         this.repository = repository;
+    }
+
+    @GetMapping("/test")
+    void oldFashionedWay(HttpServletRequest req, HttpServletResponse resp) { //starsza, niskopoziomowa mechanika obsługi
+        try {
+            System.out.println(req.getParameter("foo"));
+            resp.getWriter().println("test oldFashionedWay");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -59,7 +71,7 @@ class TaskController {
     }
 
     @GetMapping("/search/done")
-    ResponseEntity<List<Task>> readDoneTasks(@RequestParam(defaultValue = "true") boolean state){ //domyslnie szukamy zrobionych tasków
+    ResponseEntity<List<Task>> readDoneTasks(@RequestParam(defaultValue = "true") boolean state) { //domyslnie szukamy zrobionych tasków
         return ResponseEntity.ok(repository.findByDone(state));
     }
 
@@ -72,7 +84,8 @@ class TaskController {
 //        toUpdate.setId(id);
 //        repository.save(toUpdate);
         repository.findById(id)
-                .ifPresent(task->{task.updateFrom(toUpdate);
+                .ifPresent(task -> {
+                    task.updateFrom(toUpdate);
                     repository.save(task);
                 });
         return ResponseEntity.noContent().build();
@@ -85,7 +98,7 @@ class TaskController {
             return ResponseEntity.notFound().build();
         }
         repository.findById(id)
-                .ifPresent(task->task.setDone(!task.isDone()));
+                .ifPresent(task -> task.setDone(!task.isDone()));
         return ResponseEntity.noContent().build();
     }
 }
