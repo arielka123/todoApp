@@ -12,11 +12,12 @@ import java.io.IOException;
 @Component
 public class LoggerFilter implements Filter {
     public static final Logger logger = LoggerFactory.getLogger(LoggerFilter.class);
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        if(request instanceof HttpServletRequest){
+        if (request instanceof HttpServletRequest) {
             var httpRequest = (HttpServletRequest) request;
-            logger.info("[doFilter] "+ httpRequest.getMethod() + httpRequest.getRequestURI());
+            logger.info("[doFilter] " + httpRequest.getMethod() + httpRequest.getRequestURI());
         }
         chain.doFilter(request, response);
     }
