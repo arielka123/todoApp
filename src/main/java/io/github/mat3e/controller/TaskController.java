@@ -1,5 +1,6 @@
 package io.github.mat3e.controller;
 
+import io.github.mat3e.logic.TaskService;
 import io.github.mat3e.model.Task;
 import io.github.mat3e.model.TaskRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,15 +17,18 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/tasks")
 class TaskController {
     private static final Logger logger = LoggerFactory.getLogger(TaskController.class);
     private final TaskRepository repository;
+    private final TaskService service;
 
-    TaskController(final TaskRepository repository) {
+    TaskController(final TaskRepository repository, TaskService service) {
         this.repository = repository;
+        this.service = service;
     }
 
     @GetMapping("/test")
@@ -46,9 +50,10 @@ class TaskController {
 
     @RequestMapping(method = RequestMethod.GET, params = {"!sort", "!page", "!size"})
         //aby było widać metadane z HATEOSA przy tych wywyłaniach z !
-    ResponseEntity<List<Task>> readAllTask() {
+    CompletableFuture<ResponseEntity<List<Task>>> readAllTask() {
         logger.warn("Exposing all the task");
-        return ResponseEntity.ok(repository.findAll());
+//        return ResponseEntity.ok(repository.findAll());
+        return service.findAllAsync().thenApply(ResponseEntity::ok);
     }
 
     @RequestMapping(method = RequestMethod.GET)
