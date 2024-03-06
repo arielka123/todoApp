@@ -3,11 +3,11 @@ package io.github.mat3e.model.projection;
 import io.github.mat3e.model.Task;
 
 //DTO
-public class GroupTaskReadModel {
+public class TaskReadModel {
     private boolean done;
     private String description;
 
-    public GroupTaskReadModel(Task source) {
+    public TaskReadModel(Task source) {
         description=source.getDescription();
         done=source.isDone();
     }

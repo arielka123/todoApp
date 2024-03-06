@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class GroupWriteModel {
     private String description;
-    private Set<GroupTaskWriteModel> tasks;
+    private Set<TaskWriteModel> tasks;
 
     public String getDescription() {
         return description;
@@ -18,11 +18,11 @@ public class GroupWriteModel {
         this.description = description;
     }
 
-    public Set<GroupTaskWriteModel> tasks() {
+    public Set<TaskWriteModel> tasks() {
         return tasks;
     }
 
-    public void setTasks(Set<GroupTaskWriteModel> tasks) {
+    public void setTasks(Set<TaskWriteModel> tasks) {
         this.tasks = tasks;
     }
 

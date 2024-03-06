@@ -5,7 +5,8 @@ import io.github.mat3e.model.Project;
 import io.github.mat3e.model.ProjectRepository;
 import io.github.mat3e.model.TaskGroupRepository;
 import io.github.mat3e.model.projection.GroupReadModel;
-import io.github.mat3e.model.projection.GroupTaskWriteModel;
+import io.github.mat3e.model.projection.ProjectWriteModel;
+import io.github.mat3e.model.projection.TaskWriteModel;
 import io.github.mat3e.model.projection.GroupWriteModel;
 
 import java.time.LocalDateTime;
@@ -30,8 +31,9 @@ public class ProjectService {
         return repository.findAll();
     }
 
-    public Project save(final Project newProject) {
-        return repository.save(newProject);
+    public Project save(final ProjectWriteModel toSave) {
+
+        return repository.save(toSave.toProject());
     }
 
     public GroupReadModel createGroup(LocalDateTime deadline, int project_id) {
@@ -45,7 +47,7 @@ public class ProjectService {
                     targetGroup.setTasks(
                             project.getSteps().stream()
                                     .map(projectStep -> {
-                                        var task = new GroupTaskWriteModel();
+                                        var task = new TaskWriteModel();
                                         task.setDescription(projectStep.getDescription());
                                         task.setDeadline(deadline.plusDays(projectStep.getDaysToDeadline()));
                                         return task;

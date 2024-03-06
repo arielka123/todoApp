@@ -3,13 +3,11 @@ package io.github.mat3e.model.projection;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.github.mat3e.model.Task;
 import io.github.mat3e.model.TaskGroup;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
+
 //DTO
-public class GroupTaskWriteModel {
+public class TaskWriteModel {
     private String description;
 
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
@@ -33,7 +31,7 @@ public class GroupTaskWriteModel {
 
 
     public Task toTask(final TaskGroup group) {
-        return new Task(description,deadline, group);
+        return new Task(description, deadline, group);
     }
 
     @Override
