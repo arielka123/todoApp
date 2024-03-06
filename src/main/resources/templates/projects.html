@@ -6,6 +6,11 @@
     <title>Todo App: projects</title>
     <link rel="stylesheet" href="https://igoradamenko.com/awsm.css/v2/css/awsm.min.css">
     <link href="https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700,700i" rel="stylesheet">
+    <style>
+        input{
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 <main>
@@ -14,8 +19,17 @@
         <form action="#" method="post" th:action="@{/projects}" th:object="${project}">
             <legend>Nowy projekt</legend>
             <label>Opis
-                <input type="text"/>
+                <input type="text" th:field="*{description}"/>
             </label>
+            <fieldset>
+                <legend>Krok 1</legend>
+                <label>Opis
+                    <input type="text" th:field="*{steps[0].description}"/>
+                </label>
+                <label>Dni do konca projektu
+                    <input type="text" th:field="*{steps[0].daysToDeadline}"  />
+                </label>
+            </fieldset>
         </form>
     </fieldset>
 </main>
