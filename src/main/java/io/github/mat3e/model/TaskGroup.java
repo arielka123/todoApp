@@ -1,6 +1,9 @@
 package io.github.mat3e.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
@@ -13,6 +16,7 @@ public class TaskGroup extends BaseTask {
 
     //lazy loading when it is needed and cascade all when group is removed - remove all tasks
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
+    @JsonIgnore
     private Set<Task> tasks;
 
     @ManyToOne //wiele tasków w jednej grupie

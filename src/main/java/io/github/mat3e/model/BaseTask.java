@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 abstract class BaseTask {
     @NotBlank(message = "Task group's description must not be empty")
     private String description;
+
     private boolean done;
 
     String getDescription() {

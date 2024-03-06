@@ -1,5 +1,6 @@
 package io.github.mat3e.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -23,11 +24,11 @@ public class Task extends BaseTask {
     }
 
     public Task(String description, LocalDateTime deadline) {
-        this(description,deadline, null);
+        this(description, deadline, null);
     }
 
     public Task(String description, LocalDateTime deadline, TaskGroup group) {
-        this.deadline=deadline;
+        this.deadline = deadline;
         super.setDescription(description);
 
         if(group!=null){
@@ -43,12 +44,12 @@ public class Task extends BaseTask {
         this.id = id;
     }
 
-    public LocalDateTime getDeadLine() {
+    public LocalDateTime getDeadline() {
         return deadline;
     }
 
-    void setDeadLine(LocalDateTime deadLine) {
-        this.deadline = deadLine;
+    public void setDeadline(LocalDateTime deadline) {
+        this.deadline = deadline;
     }
 
     public TaskGroup getGroup() {

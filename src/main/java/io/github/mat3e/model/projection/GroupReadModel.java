@@ -4,11 +4,12 @@ import io.github.mat3e.model.Task;
 import io.github.mat3e.model.TaskGroup;
 
 import java.time.LocalDateTime;
-import java.util.Comparator;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class GroupReadModel {
+    private int id;
     private String description;
 
     /**
@@ -18,15 +19,25 @@ public class GroupReadModel {
     private Set<GroupTaskReadModel> tasks;
 
     public GroupReadModel(TaskGroup source) {
+        id = source.getId();
         description = source.getDescription();
         source.getTasks().stream()
-                .map(Task::getDeadLine)
+                .map(Task::getDeadline)
+                .filter(Objects::nonNull)
                 .max(LocalDateTime::compareTo)
-                .ifPresent(date->deadline = date);
+                .ifPresent(date -> deadline = date);
 
         tasks = source.getTasks().stream()
                 .map(GroupTaskReadModel::new)
                 .collect(Collectors.toSet());
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(final int id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -37,7 +48,7 @@ public class GroupReadModel {
         this.description = description;
     }
 
-    public LocalDateTime getDeadline() {
+    public LocalDateTime getDeadLine() {
         return deadline;
     }
 
@@ -52,4 +63,5 @@ public class GroupReadModel {
     public void setTasks(Set<GroupTaskReadModel> tasks) {
         this.tasks = tasks;
     }
+
 }

@@ -1,8 +1,8 @@
+management.endpoints.web.base-path: /status
 spring.profiles.active: local
 spring.main.banner-mode: off
+server.error.include-message: always
 task.template.allowMultipleTasksFromTemplate: false
-
-
 
 
 
