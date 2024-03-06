@@ -47,12 +47,12 @@ public class ProjectService {
                                     .map(projectStep -> {
                                         var task = new GroupTaskWriteModel();
                                         task.setDescription(projectStep.getDescription());
-//                                        task.setDeadLine(deadline.plusDays(projectStep.getDaysToDeadline()));
+                                        task.setDeadline(deadline.plusDays(projectStep.getDaysToDeadline()));
                                         return task;
                                     })
                                     .collect(Collectors.toSet())
                     );
-                    return taskGroupService.createGroup(targetGroup);
+                    return taskGroupService.createGroup(targetGroup, project);
                 }).orElseThrow(() -> new IllegalArgumentException("Project with given id not found"));
     }
 }

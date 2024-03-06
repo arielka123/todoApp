@@ -1,5 +1,6 @@
 package io.github.mat3e.logic;
 
+import io.github.mat3e.model.Project;
 import io.github.mat3e.model.TaskGroup;
 import io.github.mat3e.model.TaskGroupRepository;
 import io.github.mat3e.model.TaskRepository;
@@ -22,8 +23,12 @@ public class TaskGroupService {
         this.taskRepository = taskRepository;
     }
 
-    public GroupReadModel createGroup(GroupWriteModel source) {
-        TaskGroup result = groupRepository.save(source.toGroup());
+    public GroupReadModel createGroup(final GroupWriteModel source) {
+        return createGroup(source, null);
+    }
+
+    GroupReadModel createGroup(final GroupWriteModel source, final Project project) {
+        TaskGroup result = groupRepository.save(source.toGroup(project));
         return new GroupReadModel(result);
     }
 
@@ -43,7 +48,6 @@ public class TaskGroupService {
         result.setDone(!result.isDone());
         groupRepository.save(result);
     }
-
 
     //    @Autowired
 //    List<String> temp(TaskGroupRepository repository) {

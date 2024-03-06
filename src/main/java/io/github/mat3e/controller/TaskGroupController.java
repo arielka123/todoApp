@@ -20,13 +20,6 @@ import java.util.List;
 class TaskGroupController {
     private static final Logger logger = LoggerFactory.getLogger(TaskGroupController.class);
     private final TaskRepository repository;
-    private final TaskGroupService taskGroupService;
-
-    TaskGroupController(final TaskRepository repository, TaskGroupService taskGroupService) {
-        this.repository = repository;
-        this.taskGroupService = taskGroupService;
-    }
-
     @RequestMapping(method = RequestMethod.POST)
     ResponseEntity<GroupReadModel> createGroup(@RequestBody @Valid GroupWriteModel toCreate) {
         logger.warn(toCreate.tasks().toString());
@@ -35,16 +28,23 @@ class TaskGroupController {
         return ResponseEntity.created(URI.create("/"+result.getId())).body(result);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    ResponseEntity<List<GroupReadModel>> readAllGroups() {
-        logger.warn("Exposing all the groups");
-        return ResponseEntity.ok(taskGroupService.readAll());
-//        return ResponseEntity.ok(repository.findAll());
+    private final TaskGroupService taskGroupService;
+
+    TaskGroupController(final TaskRepository repository, TaskGroupService taskGroupService) {
+        this.repository = repository;
+        this.taskGroupService = taskGroupService;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     ResponseEntity<List<Task>> readAllTasksFromGroup(@PathVariable int id) {
         return ResponseEntity.ok(repository.findAllByGroup_Id(id));
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    ResponseEntity<List<GroupReadModel>> readAllGroups() {
+        logger.warn("Exposing all the groups");
+        return ResponseEntity.ok(taskGroupService.readAll());
+//        return ResponseEntity.ok(repository.findAll());
     }
 
 
@@ -63,5 +63,7 @@ class TaskGroupController {
     @ExceptionHandler(IllegalStateException.class)
     ResponseEntity<?>handleStateException(IllegalStateException e){
         return ResponseEntity.badRequest().body(e.getMessage());
+        
     }
+    
 }

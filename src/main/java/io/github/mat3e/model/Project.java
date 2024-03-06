@@ -36,11 +36,11 @@ public class Project {
         return description;
     }
 
-    void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    Set<TaskGroup> getGroups() {
+    public Set<TaskGroup> getGroups() {
         return groups;
     }
 
@@ -52,7 +52,7 @@ public class Project {
         return steps;
     }
 
-    void setSteps(Set<ProjectStep> steps) {
+    public void setSteps(Set<ProjectStep> steps) {
         this.steps = steps;
     }
 }
