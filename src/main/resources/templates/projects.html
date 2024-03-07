@@ -6,16 +6,23 @@
     <title>Todo App: projects</title>
     <link rel="stylesheet" href="https://igoradamenko.com/awsm.css/v2/css/awsm.css">
     <style>
+        .Bd{
+            border:solid 1px black;
+        }
+        .P\(0\){
+            padding: 0;
+        }
+        .P\(10\){
+            padding: 10px;
+        }
         input {
             width: 98%;
             border-radius: 25px;
         }
-
         label {
             font-size: small;
             color: gray
         }
-
         fieldset > legend {
             color: lightgray;
         }
@@ -25,10 +32,10 @@
 <main>
     <h1 th:if="message!=null" th:text="${message}"></h1>
     <!--/*@thymesVar id="projects" type="java.util.List<io.github.mat3e.model.Project>"*/-->
-    <dl th:each="project:${projects}">
+    <dl th:each="project:${projects}" class="Bd P(10)">
         <dt th:text="${project.description}">...</dt>
         <dd>
-            <ul>
+            <ul class="P(0)">
                 <li th:each="step: ${project.steps}" th:text="|${step.description} (${step.daysToDeadline} dni)|"></li>
             </ul>
         </dd>
