@@ -2,6 +2,8 @@ package io.github.mat3e.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.time.LocalDateTime;
 
@@ -52,11 +54,11 @@ public class Task extends BaseTask {
         this.deadline = deadline;
     }
 
-    public TaskGroup getGroup() {
+    TaskGroup getGroup() {
         return group;
     }
 
-    public void setGroup(TaskGroup group) {
+    void setGroup(TaskGroup group) {
         this.group = group;
     }
 

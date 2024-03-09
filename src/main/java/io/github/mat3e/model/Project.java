@@ -1,5 +1,6 @@
 package io.github.mat3e.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -16,9 +17,11 @@ public class Project {
     private String description;
 
     @OneToMany(mappedBy = "project")
+//    @JsonIgnore
     private Set<TaskGroup> groups;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
+//    @JsonIgnore
     private Set<ProjectStep> steps;
 
     public Project() {
@@ -40,7 +43,7 @@ public class Project {
         this.description = description;
     }
 
-    public Set<TaskGroup> getGroups() {
+    Set<TaskGroup> getGroups() {
         return groups;
     }
 

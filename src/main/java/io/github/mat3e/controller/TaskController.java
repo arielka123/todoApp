@@ -67,11 +67,11 @@ class TaskController {
 //        ResponseEntity<?> readAllTask(Pageable pageable)
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/today")
-    ResponseEntity<List<Task>> readAllTaskToday() {
-        logger.info("task to done today");
-        return ResponseEntity.ok(repository.findAllByDoneIsFalseAndDeadlineIsNullOrDeadlineBeforeOrderByDeadlineAsc(LocalDateTime.now()));
-    }
+//    @RequestMapping(method = RequestMethod.GET, value = "/today")
+//    ResponseEntity<List<Task>> readAllTaskToday() {
+//        logger.info("task to done today");
+//        return ResponseEntity.ok(repository.findAllByDoneIsFalseAndDeadlineIsNullOrDeadlineBeforeOrderByDeadlineAsc(LocalDateTime.now()));
+//    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     ResponseEntity<Task> readTask(@PathVariable int id) {
