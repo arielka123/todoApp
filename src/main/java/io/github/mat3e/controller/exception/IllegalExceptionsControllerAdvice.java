@@ -1,6 +1,5 @@
 package io.github.mat3e.controller.exception;
 
-import io.github.mat3e.controller.exception.IllegalExceptionProcessing;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
