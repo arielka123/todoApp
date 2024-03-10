@@ -3,14 +3,17 @@ package io.github.mat3e.model.projection;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.github.mat3e.model.Task;
 import io.github.mat3e.model.TaskGroup;
+import jakarta.validation.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
 //DTO
 public class TaskWriteModel {
+    @NotBlank(message = "Task group's description must not be empty")
     private String description;
 
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime deadline;
 
     public String getDescription() {

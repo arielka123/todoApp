@@ -1,5 +1,6 @@
 package io.github.mat3e.controller;
 
+import io.github.mat3e.logic.TaskService;
 import io.github.mat3e.model.Task;
 import io.github.mat3e.model.TaskRepository;
 import org.junit.jupiter.api.Test;
@@ -26,6 +27,9 @@ public class TaskControllerLightIntegrationTest {
 
     @MockBean
     private TaskRepository repo;
+
+    @MockBean
+    private TaskService service; //musi byc przez async które wykorzystuje controller
 
     @Test
     void httpGet_returnsGivenTask() {

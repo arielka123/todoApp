@@ -2,13 +2,22 @@ package io.github.mat3e.model.projection;
 
 import io.github.mat3e.model.Project;
 import io.github.mat3e.model.TaskGroup;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class GroupWriteModel {
+    @NotBlank(message = "Task group's description must not be empty")
     private String description;
-    private Set<TaskWriteModel> tasks;
+    @Valid
+    private List<TaskWriteModel> tasks = new ArrayList<>();
+
+    public GroupWriteModel() {
+        tasks.add(new TaskWriteModel());
+    }
 
     public String getDescription() {
         return description;
@@ -18,11 +27,11 @@ public class GroupWriteModel {
         this.description = description;
     }
 
-    public Set<TaskWriteModel> tasks() {
+    public List<TaskWriteModel> getTasks() {
         return tasks;
     }
 
-    public void setTasks(Set<TaskWriteModel> tasks) {
+    public void setTasks(List<TaskWriteModel> tasks) {
         this.tasks = tasks;
     }
 
