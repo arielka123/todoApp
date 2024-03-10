@@ -2,8 +2,8 @@ package io.github.mat3e.logic;
 
 import io.github.mat3e.model.Project;
 import io.github.mat3e.model.TaskGroup;
-import io.github.mat3e.model.TaskGroupRepository;
-import io.github.mat3e.model.TaskRepository;
+import io.github.mat3e.model.repository.TaskGroupRepository;
+import io.github.mat3e.model.repository.TaskRepository;
 import io.github.mat3e.model.projection.GroupReadModel;
 import io.github.mat3e.model.projection.GroupWriteModel;
 

@@ -1,4 +1,4 @@
-package io.github.mat3e.controller;
+package io.github.mat3e.controller.exception;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

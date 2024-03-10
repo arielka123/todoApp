@@ -3,6 +3,8 @@ package io.github.mat3e.logic;
 import io.github.mat3e.TaskConfigurationProperties;
 import io.github.mat3e.model.*;
 import io.github.mat3e.model.projection.GroupReadModel;
+import io.github.mat3e.model.repository.ProjectRepository;
+import io.github.mat3e.model.repository.TaskGroupRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

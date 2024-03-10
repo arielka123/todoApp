@@ -2,7 +2,7 @@ package io.github.mat3e.controller;
 
 import io.github.mat3e.logic.TaskService;
 import io.github.mat3e.model.Task;
-import io.github.mat3e.model.TaskRepository;
+import io.github.mat3e.model.repository.TaskRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.net.URI;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;

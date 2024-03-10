@@ -1,5 +1,6 @@
-package io.github.mat3e.model;
+package io.github.mat3e.model.repository;
 
+import io.github.mat3e.model.TaskGroup;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

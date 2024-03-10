@@ -1,9 +1,9 @@
 package io.github.mat3e.logic;
 
 import io.github.mat3e.TaskConfigurationProperties;
-import io.github.mat3e.model.ProjectRepository;
-import io.github.mat3e.model.TaskGroupRepository;
-import io.github.mat3e.model.TaskRepository;
+import io.github.mat3e.model.repository.ProjectRepository;
+import io.github.mat3e.model.repository.TaskGroupRepository;
+import io.github.mat3e.model.repository.TaskRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.annotation.RequestScope;

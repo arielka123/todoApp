@@ -1,5 +1,6 @@
-package io.github.mat3e.model;
+package io.github.mat3e.model.repository;
 
+import io.github.mat3e.model.Task;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;

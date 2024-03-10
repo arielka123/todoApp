@@ -1,7 +1,7 @@
 package io.github.mat3e;
 
 import io.github.mat3e.model.Task;
-import io.github.mat3e.model.TaskRepository;
+import io.github.mat3e.model.repository.TaskRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -11,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
-import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.util.*;
 

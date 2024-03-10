@@ -1,7 +1,7 @@
 package io.github.mat3e.controller;
 
 import io.github.mat3e.model.Task;
-import io.github.mat3e.model.TaskRepository;
+import io.github.mat3e.model.repository.TaskRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

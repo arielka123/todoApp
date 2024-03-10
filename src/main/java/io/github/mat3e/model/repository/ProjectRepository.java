@@ -1,4 +1,6 @@
-package io.github.mat3e.model;
+package io.github.mat3e.model.repository;
+
+import io.github.mat3e.model.Project;
 
 import java.util.List;
 import java.util.Optional;

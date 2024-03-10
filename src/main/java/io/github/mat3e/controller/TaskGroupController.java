@@ -1,8 +1,9 @@
 package io.github.mat3e.controller;
 
+import io.github.mat3e.controller.exception.IllegalExceptionProcessing;
 import io.github.mat3e.logic.TaskGroupService;
 import io.github.mat3e.model.Task;
-import io.github.mat3e.model.TaskRepository;
+import io.github.mat3e.model.repository.TaskRepository;
 import io.github.mat3e.model.projection.GroupReadModel;
 import io.github.mat3e.model.projection.GroupWriteModel;
 import io.github.mat3e.model.projection.TaskWriteModel;

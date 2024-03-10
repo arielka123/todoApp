@@ -1,8 +1,8 @@
 package io.github.mat3e.logic;
 
 import io.github.mat3e.model.TaskGroup;
-import io.github.mat3e.model.TaskGroupRepository;
-import io.github.mat3e.model.TaskRepository;
+import io.github.mat3e.model.repository.TaskGroupRepository;
+import io.github.mat3e.model.repository.TaskRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +10,6 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

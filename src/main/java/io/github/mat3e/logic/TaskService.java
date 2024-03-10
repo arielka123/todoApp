@@ -1,12 +1,10 @@
 package io.github.mat3e.logic;
 
 import io.github.mat3e.model.Task;
-import io.github.mat3e.model.TaskRepository;
+import io.github.mat3e.model.repository.TaskRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
