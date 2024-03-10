@@ -4,6 +4,7 @@ import io.github.mat3e.logic.ProjectService;
 import io.github.mat3e.model.Project;
 import io.github.mat3e.model.ProjectStep;
 import io.github.mat3e.model.projection.ProjectWriteModel;
+import io.micrometer.core.annotation.Timed;
 import jakarta.validation.Valid;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -49,6 +50,7 @@ public class ProjectController {
         return "projects";
     }
 
+    @Timed(value = "app.create.group", histogram = true, percentiles ={0.5, 0.95, 0.99} ) //TODO
     @PostMapping("/{id}")
     String createGroup(@ModelAttribute("project") ProjectWriteModel current,
                        Model model,
