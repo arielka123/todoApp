@@ -22,6 +22,7 @@ import java.util.List;
 
 //@RestController
 @Controller
+@IllegalExceptionProcessing
 @RequestMapping(value = "/groups")
 class TaskGroupController {
     private static final Logger logger = LoggerFactory.getLogger(TaskGroupController.class);
@@ -88,19 +89,6 @@ class TaskGroupController {
     public ResponseEntity<?> toggleGroup(@PathVariable int id) {
         taskGroupService.toggleGroup(id);
         return ResponseEntity.noContent().build();
-    }
-
-
-    @ExceptionHandler(IllegalArgumentException.class)
-        /// zmienia kod błedu z 500 na 404
-    ResponseEntity<?> handleIllegalArgument(IllegalArgumentException e) {
-        return ResponseEntity.notFound().build();
-    }
-
-    @ExceptionHandler(IllegalStateException.class)
-    ResponseEntity<?> handleStateException(IllegalStateException e) {
-        return ResponseEntity.badRequest().body(e.getMessage());
-
     }
 
     @ModelAttribute("groups")
