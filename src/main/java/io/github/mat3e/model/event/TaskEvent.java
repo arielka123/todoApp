@@ -18,11 +18,11 @@ public abstract class TaskEvent {
         this.occurrence = Instant.now(clock);
     }
 
-    public int taskId() {
+    public int getTaskId() {
         return taskId;
     }
 
-    public Instant occurrence() {
+    public Instant getOccurrence() {
         return occurrence;
     }
 
