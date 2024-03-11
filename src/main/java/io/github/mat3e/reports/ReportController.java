@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -37,15 +38,28 @@ class ReportController {
     @GetMapping("/deadline/{id}")
     ResponseEntity<TaskWithDeadlineReport> readTaskWithDeadline(@PathVariable int id) {
         return taskRepository.findById(id)
-                .map(task -> new TaskWithDeadlineReport(task, eventRepository.findByTaskIdAndNameOrderByOccurrenceDesc(id, "TaskDone")))
+                .map(task -> new TaskWithDeadlineReport(task, eventRepository.findByTaskIdAndNameOrderByOccurrenceDesc(id, "TaskDone").getFirst().occurrence))
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/deadline/done={done}")
-    ResponseEntity<?> readTaskWithDeadlineDone(@PathVariable boolean done) {
-        List<Task> tasks = taskRepository.findByDone(done);
-        return ResponseEntity.ok(taskRepository.findByDone(done));
+//    @GetMapping("/deadline/done={done}")
+//    ResponseEntity<?> readTaskWithDeadlineDone(@PathVariable boolean done) {
+//        List<Task> tasks = taskRepository.findByDone(done);
+//        return ResponseEntity.ok(taskRepository.findByDone(done));
+//    }
+
+    @GetMapping("/deadline")
+    ResponseEntity<?> readDoneTasksWithDeadlineAfterAndBefore() {
+        List<Task> tasks = taskRepository.findAll();
+        List<TaskWithDeadlineReport> newList = new ArrayList<>();
+
+        for (Task task : tasks) {
+            var oneEvent = eventRepository.findByTaskIdAndNameOrderByOccurrenceDesc(task.getId(), "TaskDone");
+            var newObj = new TaskWithDeadlineReport(task, oneEvent.getFirst().occurrence);
+            newList.add(newObj);
+        }
+        return ResponseEntity.ok(newList);
     }
 
     private static class TaskWithChangesCount {
@@ -67,18 +81,46 @@ class ReportController {
         public boolean done;
         public boolean afterDeadlineDone;
         public boolean beforeDeadlineDone;
+        public boolean inDeadlineDone;
         @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
         public LocalDateTime date;
         @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
         public LocalDateTime deadline;
 
-        TaskWithDeadlineReport(final Task task, final List<PersistedTaskEvent> event) {
-            description = task.getDescription();
-            done = task.isDone();
-            deadline = task.getDeadline();
-            date = event.getFirst().occurrence;
-            afterDeadlineDone = task.isDone() && date.isAfter(task.getDeadline());
-            beforeDeadlineDone = task.isDone() && date.isBefore(task.getDeadline());
+//        TaskWithDeadlineReport(final Task task, final List<PersistedTaskEvent> event) {
+//            description = task.getDescription();
+//            done = task.isDone();
+//            deadline = task.getDeadline();
+//            date = event.getFirst().occurrence;
+//            if (deadline == null || date == null) {
+//                afterDeadlineDone = false;
+//                beforeDeadlineDone = false;
+//            } else {
+//                afterDeadlineDone = task.isDone() && date.isAfter(task.getDeadline());
+//                beforeDeadlineDone = task.isDone() && date.isBefore(task.getDeadline());
+//                inDeadlineDone = task.isDone() && date.isEqual(task.getDeadline());
+//            }
+
+//        }
+
+        TaskWithDeadlineReport(final Task task, final LocalDateTime date) {
+            this.description = task.getDescription();
+            this.done = task.isDone();
+            this.deadline = task.getDeadline();
+            this.date = date;
+            if (deadline == null) {
+                inDeadlineDone = true;
+            }
+            else if (date == null){
+                inDeadlineDone = false;
+                afterDeadlineDone = false;
+                beforeDeadlineDone = false;
+            }else {
+                afterDeadlineDone = task.isDone() && date.isAfter(task.getDeadline());
+                beforeDeadlineDone = task.isDone() && date.isBefore(task.getDeadline());
+                inDeadlineDone = task.isDone() && date.isEqual(task.getDeadline());
+            }
+
         }
     }
 }

@@ -9,5 +9,4 @@ import java.util.List;
 interface PersistedTaskEventRepository extends JpaRepository<PersistedTaskEvent, Integer> {
     List<PersistedTaskEvent> findByTaskId(int taskId);
     List<PersistedTaskEvent> findByTaskIdAndNameOrderByOccurrenceDesc(int taskId, String name);
-    List<PersistedTaskEvent> findByNameOrderById(String name);
 }
