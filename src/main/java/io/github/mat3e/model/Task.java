@@ -1,19 +1,22 @@
 package io.github.mat3e.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import io.github.mat3e.model.event.TaskEvent;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tasks")
-public class Task extends BaseTask {
+public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private LocalDateTime deadline;
+    @NotBlank(message = "Task group's description must not be empty")
+    private String description;
+
+    private boolean done;
 
     @Embedded
     private final Audit audit = new Audit();
@@ -31,7 +34,7 @@ public class Task extends BaseTask {
 
     public Task(String description, LocalDateTime deadline, TaskGroup group) {
         this.deadline = deadline;
-        super.setDescription(description);
+        this.description = description;
 
         if(group!=null){
             this.group = group;
@@ -44,6 +47,23 @@ public class Task extends BaseTask {
 
     void setId(int id) {
         this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(final String description) {
+        this.description = description;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public TaskEvent toggle() {
+        this.done = !this.done;
+        return TaskEvent.changed(this);
     }
 
     public LocalDateTime getDeadline() {
@@ -63,19 +83,9 @@ public class Task extends BaseTask {
     }
 
     public void updateFrom(final Task source) {
-        super.setDescription(source.getDescription());
-        super.setDone(source.isDone());
+        description = source.description;
+        done = source.done;
         deadline = source.deadline;
         group = source.group;
-    }
-
-    @Override
-    public String getDescription() {
-        return super.getDescription();
-    }
-
-    @Override
-    public boolean isDone() {
-        return super.isDone();
     }
 }
