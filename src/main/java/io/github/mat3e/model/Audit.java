@@ -21,4 +21,12 @@ class Audit {
     void preMerge() {
         updatedOn = LocalDateTime.now();
     }
+
+    LocalDateTime getCreatedOn() {
+        return createdOn;
+    }
+
+    public LocalDateTime getUpdatedOn() {
+        return updatedOn;
+    }
 }
