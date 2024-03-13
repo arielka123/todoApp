@@ -23,4 +23,9 @@ public class TodoAppApplication {
 	Validator validator() {
 		return new LocalValidatorFactoryBean();
 	}
+
+	@Bean
+	TimedAspect timedAspect(MeterRegistry registry) {
+		return new TimedAspect(registry);
+	}
 }
