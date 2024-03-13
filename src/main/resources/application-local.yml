@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: TodoApp
   datasource:
     url: 'jdbc:h2:file:C:\\Users\\Arielka\\Desktop\\projekt_przyszly_programista\\java\\0_java_web\\Spring-framework\\todo-app\\todo-app\\todo-db'
   h2.console:
@@ -6,28 +8,33 @@ spring:
     path: '/console'
   jpa.hibernate:
     ddl-auto: validate
+
+#security config
   security:
     oauth2:
-      client:
-        provider:
-          keycloak:
-            issuer-uri: http://localhost:8180/realms/TodoApp
-            user-name-attribute: preferred_username
-        registration:
-          keycloak:
-            client-id: todo-spring-client
-            authorization-grant-type: authorization_code
-            scope: openid
-        #            redirect-uri: http://localhost:8180
-#      resourceserver:
-#        jwt:
-#          issuer-uri: http://localhost:8180/realms/TodoApp
-#          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
-#jwt:
-#  auth:
-#    converter:
-#      resource-id: todo-spring-client
-#      principle-attribute: preferred_username
+#      client:
+#        provider:
+#          keycloak:
+#            issuer-uri: http://localhost:8180/realms/TodoApp
+#            user-name-attribute: preferred_username
+#        registration:
+#          keycloak:
+#            client-id: todo-spring-client
+#            authorization-grant-type: authorization_code
+#            scope: openid
+#        #            redirect-uri: http://localhost:8180
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8180/realms/TodoApp
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
+#JWT configurations
+jwt:
+  auth:
+    converter:
+      resource-id: todo-spring-client
+      principle-attribute: principal_username
+#
 management:
   endpoints:
     web:

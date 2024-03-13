@@ -38,7 +38,8 @@ class ReportController {
     @GetMapping("/deadline/{id}")
     ResponseEntity<TaskWithDeadlineReport> readTaskWithDeadline(@PathVariable int id) {
         return taskRepository.findById(id)
-                .map(task -> new TaskWithDeadlineReport(task, eventRepository.findByTaskIdAndNameOrderByOccurrenceDesc(id, "TaskDone").getFirst().occurrence))
+                .map(task -> new TaskWithDeadlineReport(task, eventRepository
+                        .findByTaskIdAndNameOrderByOccurrenceDesc(id, "TaskDone").get(0).occurrence))
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -56,7 +57,7 @@ class ReportController {
 
         for (Task task : tasks) {
             var oneEvent = eventRepository.findByTaskIdAndNameOrderByOccurrenceDesc(task.getId(), "TaskDone");
-            var newObj = new TaskWithDeadlineReport(task, oneEvent.getFirst().occurrence);
+            var newObj = new TaskWithDeadlineReport(task, oneEvent.get(0).occurrence);
             newList.add(newObj);
         }
         return ResponseEntity.ok(newList);
