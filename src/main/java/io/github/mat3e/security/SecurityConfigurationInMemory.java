@@ -26,6 +26,7 @@ public class SecurityConfigurationInMemory {
                 .authorizeHttpRequests(authorize ->
                         authorize
                                 .requestMatchers("/info/*").hasRole("USER")
+                                .requestMatchers("projects").hasRole("ADMIN")
                                 .anyRequest().permitAll()
                 )
                 .httpBasic(Customizer.withDefaults())
@@ -49,15 +50,33 @@ public class SecurityConfigurationInMemory {
         return providerManager;
     }
 
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        UserDetails userDetails = User.withUsername("user")
+//                .password(passwordEncoder().encode("password"))
+//                .roles("USER")
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(userDetails);
+//    }
+
     @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails userDetails = User.withUsername("user")
-                .password(passwordEncoder().encode("password"))
+    public UserDetailsService users() {
+        // The builder will ensure the passwords are encoded before saving in memory
+        User.UserBuilder users = User.withDefaultPasswordEncoder();
+        UserDetails user = users
+                .username("user")
+                .password("user")
                 .roles("USER")
                 .build();
-
-        return new InMemoryUserDetailsManager(userDetails);
+        UserDetails admin = users
+                .username("admin")
+                .password("admin")
+                .roles("USER", "ADMIN")
+                .build();
+        return new InMemoryUserDetailsManager(user, admin);
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
